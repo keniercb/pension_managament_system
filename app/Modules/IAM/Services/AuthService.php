@@ -7,7 +7,7 @@ use App\Modules\IAM\Repositories\Contracts\UserRepositoryInterface;
 use App\Modules\IAM\Services\Contracts\AuthServiceInterface;
 use Illuminate\Support\Facades\Hash;
 
-class AuthService implements Contracts\AuthServiceInterface
+class AuthService implements AuthServiceInterface
 {
 
     public function __construct(protected UserRepositoryInterface $userRepository)
@@ -28,5 +28,10 @@ class AuthService implements Contracts\AuthServiceInterface
             );
         }
         throw new \Exception('Authentication failed');
+    }
+
+    public function logout(): void
+    {
+        auth()->user()->tokens()->delete();
     }
 }

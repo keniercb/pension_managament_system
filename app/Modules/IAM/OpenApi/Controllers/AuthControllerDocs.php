@@ -30,8 +30,36 @@ abstract class AuthControllerDocs
             content: new JsonContent(
                 ref: '#/components/schemas/AuthResponse'
             )
+        ),
+        new Response(
+            response: 401,
+            description: 'Unauthenticated',
+        ),
+        new Response(
+            response: 422,
+            description: 'Validation Error',
         )
     ]
+    )]
+    #[Post(
+        path: '/auth/logout',
+        operationId: 'logout',
+        description: 'Logout user',
+        tags: ['Authorization'],
+        responses: [
+            new Response(
+                response: 200,
+                description: 'User logged out successfully'
+            ),
+            new Response(
+                response: 401,
+                description: 'Unauthenticated',
+            ),
+            new Response(
+                response: 422,
+                description: 'Validation Error',
+            )
+        ]
     )]
     abstract public function docs();
 }

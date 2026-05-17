@@ -50,7 +50,7 @@ class CommonServiceProvider extends ServiceProvider
 
         if (file_exists($routesPath)) {
             Route::prefix('api/v1/commons')
-                //->middleware(['api', 'auth:sanctum'])
+                ->middleware(['api', 'auth:sanctum'])
                 ->group($routesPath);
         }
     }

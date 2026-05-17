@@ -7,4 +7,5 @@ use App\Modules\IAM\Data\AuthUserData;
 interface AuthServiceInterface
 {
     public function authenticate($email, $password) : AuthUserData;
+    public function logout() : void;
 }

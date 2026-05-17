@@ -66,7 +66,7 @@ abstract class OfficeControllerDocs
             ),
             new Response(
                 response: 401,
-                description: 'Unauthorized',
+                description: 'Unauthenticated',
             ),
             new Response(
                 response: 422,
@@ -91,7 +91,7 @@ abstract class OfficeControllerDocs
             ),
             new Response(
                 response: 401,
-                description: 'Unauthorized',
+                description: 'Unauthenticated',
             ),
             new Response(
                 response: 422,

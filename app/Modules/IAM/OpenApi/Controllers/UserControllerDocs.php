@@ -65,7 +65,7 @@ abstract class UserControllerDocs
             ),
             new Response(
                 response: 401,
-                description: 'Unauthorized',
+                description: 'Unauthenticated',
             ),
             new Response(
                 response: 422,
