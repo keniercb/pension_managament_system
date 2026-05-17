@@ -1,0 +1,49 @@
+<?php
+
+namespace {{namespace}}\Repositories;
+
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
+use {{namespace}}\Models\{{modulePascal}};
+use {{namespace}}\Repositories\Contracts\{{modulePascal}}RepositoryInterface;
+
+class {{modulePascal}}Repository implements {{modulePascal}}RepositoryInterface
+{
+    /**
+    * Fetch {{modulePascal}} objects by given params
+    **/
+    public function get{{modulePascal}}ByParams(array $params) : LengthAwarePaginator | Collection
+    {
+    }
+    /**
+    * Creates a new {{modulePascal}}
+    **/
+    public function create{{modulePascal}}(array $object{{modulePascal}}) : {{modulePascal}}
+    {
+        return {{modulePascal}}::create($object{{modulePascal}});
+    }
+    /**
+    * Updates a {{modulePascal}} object, returns true if action is executed successfully
+    **/
+    public function update{{modulePascal}}(int $id, $object{{modulePascal}}) : bool
+    {
+        {{modulePascal}}::findOrFail($id)->update($object{{modulePascal}});
+        return true;
+    }
+
+    /**
+    * Deletes a {{modulePascal}} object, returns true if action is executed successfully
+    **/
+    public function delete{{modulePascal}}(int $id) : bool
+    {
+        {{modulePascal}}::findOrFail($id)->delete();
+        return true;
+    }
+    /**
+    * Retrieve a {{modulePascal}} object by given Identifier
+    **/
+    public function find{{modulePascal}}ById(int $id) : {{modulePascal}}
+    {
+        return {{modulePascal}}::findOrFail($id);
+    }
+}

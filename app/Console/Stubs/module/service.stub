@@ -1,0 +1,52 @@
+<?php
+
+namespace {{namespace}}\Services;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
+use {{namespace}}\Repositories\Contracts\{{modulePascal}}RepositoryInterface;
+use {{namespace}}\Services\Contracts\{{modulePascal}}ServiceInterface;
+use {{namespace}}\Models\{{modulePascal}};
+
+class {{modulePascal}}Service implements {{modulePascal}}ServiceInterface
+{
+    public function __construct(
+        protected {{modulePascal}}RepositoryInterface ${{moduleCamel}}Repository
+    )
+    {
+    }
+    /**
+    * Fetch {{modulePascal}} objects by given params
+    **/
+    public function get{{modulePascal}}ByParams($params) : LengthAwarePaginator | Collection
+    {
+        return $this->{{moduleCamel}}Repository->get{{modulePascal}}ByParams($params);
+    }
+    /**
+    * Creates a new {{modulePascal}}
+    **/
+    public function create{{modulePascal}}($object{{modulePascal}}) : {{modulePascal}}
+    {
+        return $this->{{moduleCamel}}Repository->create{{modulePascal}}($object{{modulePascal}});
+    }
+    /**
+    * Updates a {{modulePascal}} object, returns true if action is executed successfully
+    **/
+    public function update{{modulePascal}}(int $id, $object{{modulePascal}}) : bool
+    {
+        return $this->{{moduleCamel}}Repository->update{{modulePascal}}($id, $object{{modulePascal}});
+    }
+    /**
+    * Deletes a {{modulePascal}} object, returns true if action is executed successfully
+    **/
+    public function delete{{modulePascal}}(int $id) : bool
+    {
+        return $this->{{moduleCamel}}Repository->delete{{modulePascal}}($id);
+    }
+    /**
+    * Retrieve a {{modulePascal}} object by given Identifier
+    **/
+    public function find{{modulePascal}}ById(int $id) : {{modulePascal}}
+    {
+         return $this->{{moduleCamel}}Repository->find{{modulePascal}}ById($id);
+    }
+}

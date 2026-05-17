@@ -1,0 +1,439 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Pension Management System API",
+        "description": "Comprehensive API for pension administration, including member enrollment, contribution tracking, benefit calculations, retirement processing, and beneficiary management",
+        "contact": {
+            "name": "Pension Management System API Support",
+            "email": "dev@xetid.cu"
+        },
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "/api/v1/"
+        }
+    ],
+    "paths": {
+        "/entities/office-types": {
+            "get": {
+                "tags": [
+                    "Office"
+                ],
+                "summary": "Get the list of offices types",
+                "description": "List of offices types",
+                "operationId": "listOfficeTypes",
+                "responses": {
+                    "200": {
+                        "description": "List of offices types",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OfficeTypeResponse"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/entities/offices": {
+            "get": {
+                "tags": [
+                    "Office"
+                ],
+                "summary": "Office list by parameters",
+                "description": "Retrieve office list by parameters",
+                "operationId": "getOffices",
+                "responses": {
+                    "200": {
+                        "description": "Operation successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OfficeResponse"
+                                            }
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer"
+                                                },
+                                                "from": {
+                                                    "type": "integer"
+                                                },
+                                                "last_page": {
+                                                    "type": "integer"
+                                                },
+                                                "per_page": {
+                                                    "type": "integer"
+                                                },
+                                                "to": {
+                                                    "type": "integer"
+                                                },
+                                                "total": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Office"
+                ],
+                "summary": "Creates an Office",
+                "description": "Creates an Office",
+                "operationId": "createOffice",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreOfficeRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Office created successfully"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation Error"
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "description": "Login user",
+                "operationId": "login",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login user successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/iam/users": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "description": "Return all users by params",
+                "operationId": "getUsers",
+                "responses": {
+                    "200": {
+                        "description": "Operation successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/UserResponse"
+                                            }
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer"
+                                                },
+                                                "from": {
+                                                    "type": "integer"
+                                                },
+                                                "last_page": {
+                                                    "type": "integer"
+                                                },
+                                                "per_page": {
+                                                    "type": "integer"
+                                                },
+                                                "to": {
+                                                    "type": "integer"
+                                                },
+                                                "total": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "description": "Create new user",
+                "operationId": "createUser",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Created user successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation Error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "OfficeResponse": {
+                "title": "Office Response",
+                "description": "Office Response",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "province": {
+                        "type": "integer"
+                    },
+                    "municipality": {
+                        "type": "integer"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "OfficeTypeResponse": {
+                "title": "Office Type Response",
+                "description": "Office Type Response",
+                "properties": {
+                    "id": {
+                        "description": "Office Type Id",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Office Type Name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreOfficeRequest": {
+                "title": "Store Office Request",
+                "description": "Store office request payload",
+                "required": [
+                    "name",
+                    "provinceId",
+                    "municipalityId",
+                    "officeTypeId"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "The name of the office",
+                        "type": "string"
+                    },
+                    "provinceId": {
+                        "description": "The ID of the province",
+                        "type": "integer"
+                    },
+                    "municipalityId": {
+                        "description": "The ID of the municipality",
+                        "type": "integer"
+                    },
+                    "officeTypeId": {
+                        "description": "The ID of the office type",
+                        "type": "integer"
+                    },
+                    "address": {
+                        "description": "The address of the office",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "The phone number of the office",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AuthRequest": {
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AuthResponse": {
+                "title": "Login user response",
+                "properties": {
+                    "id": {
+                        "title": "User ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "title": "User name",
+                        "type": "string"
+                    },
+                    "email": {
+                        "title": "User email",
+                        "type": "string"
+                    },
+                    "token": {
+                        "title": "User authentication token",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreUserRequest": {
+                "title": "Store User Request",
+                "description": "",
+                "required": [
+                    "name",
+                    "email",
+                    "password",
+                    "password_confirmation"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "password_confirmation": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UserResponse": {
+                "title": "User Response Data",
+                "description": "User Response Data",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Office",
+            "description": "Office Management System API"
+        },
+        {
+            "name": "Authorization",
+            "description": "Authorization API"
+        },
+        {
+            "name": "User",
+            "description": "User API"
+        }
+    ]
+}

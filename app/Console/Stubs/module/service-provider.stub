@@ -1,0 +1,52 @@
+<?php
+
+namespace {{namespace}}\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
+
+class {{modulePascal}}ServiceProvider extends ServiceProvider
+{
+    /**
+     * Register services.
+     */
+    public function register(): void
+    {
+
+    }
+
+    /**
+     * Bootstrap services.
+     */
+    public function boot(): void
+    {
+        $this->loadRoutes();
+        $this->loadMigrations();
+    }
+
+    /**
+     * Load Module Routes
+     */
+    protected function loadRoutes(): void
+    {
+        $routesPath = __DIR__ . '/../Routes/api.php';
+
+        if (file_exists($routesPath)) {
+            Route::prefix('api/v1/{{modulePlural}}')
+                ->middleware(['api', 'auth:sanctum'])
+                ->group($routesPath);
+        }
+    }
+
+    /**
+     * Loads all module migrations
+     */
+    protected function loadMigrations(): void
+    {
+        $migrationsPath = __DIR__ . '/../Database/Migrations';
+
+        if (is_dir($migrationsPath)) {
+            $this->loadMigrationsFrom($migrationsPath);
+        }
+    }
+}

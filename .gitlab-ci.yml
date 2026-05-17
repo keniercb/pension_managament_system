@@ -1,0 +1,38 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  DEPLOY_PATH: /var/www/html/seguridad-social-backend
+
+build-job:
+  stage: build
+  script:
+    - echo "Build iniciado..."
+    - echo "Build terminado."
+  tags:
+    - APP-8
+
+deploy-job:
+  stage: deploy
+  variables:
+    GIT_STRATEGY: clone
+  script:
+    # 1. Ver qué archivos voy a copiar
+    - echo "Archivos en el repositorio:"
+    - ls -la $CI_PROJECT_DIR/
+    
+    # 2. Sincronizar código
+    - rsync -rzv  $CI_PROJECT_DIR/ $DEPLOY_PATH/
+    # Nota: usé -v (verbose) para ver qué copia
+    
+    # 5. (OPCIONAL) Temporalmente comenta la migración para pruebas
+    # - cd $DEPLOY_PATH && php artisan migrate
+    
+  environment:
+    name: entorno-$CI_COMMIT_BRANCH
+    deployment_tier: development
+  only:
+    - dev
+  tags:
+    - APP-8
